@@ -1,0 +1,326 @@
+{
+  "users": [
+    {
+      "id": "kedar",
+      "password": "kedar",
+      "fullName": "Kedar",
+      "financialData": [
+        {
+          "id": "1714456309068",
+          "amount": "sxgs",
+          "deadline": "2024-04-10T05:51:00.000Z",
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1714299888643",
+          "title": "lll",
+          "deadline": "1970-01-15T00:00:00.000Z",
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1714040626564",
+          "title": "kk",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713953896824",
+          "title": "aaa",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713765416641",
+          "title": "nfdba",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713765408888",
+          "title": "ljhgfkk",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713765253273",
+          "title": "ssss",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713765249475",
+          "title": "aaa",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713419637177",
+          "title": "hhhhhhh",
+          "deadline": null,
+          "completed": true,
+          "favorites": true
+        },
+        {
+          "id": "1713419629045",
+          "title": "i",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713419622539",
+          "title": "g",
+          "deadline": null,
+          "completed": true,
+          "favorites": true
+        },
+        {
+          "id": "1713419616562",
+          "title": "e",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713419613679",
+          "title": "d",
+          "deadline": null,
+          "completed": true,
+          "favorites": false
+        }
+      ]
+    },
+    {
+      "id": "aaa",
+      "password": "Asdfghjkl1234*",
+      "fullName": "aaa",
+      "tasks": []
+    },
+    {
+      "id": "mada",
+      "password": "Bounteous1!",
+      "fullName": "madasamy",
+      "tasks": [
+        {
+          "id": "1713426644796",
+          "title": "fjhjg",
+          "deadline": null,
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1713426566986",
+          "title": "no teas",
+          "deadline": null,
+          "completed": true,
+          "favorites": true
+        }
+      ]
+    },
+    {
+      "id": "hazleshiny",
+      "password": "Sarveshwaranvp@123",
+      "fullName": "sarvesh",
+      "tasks": [
+        {
+          "id": "1713438655739",
+          "title": "heloc  kk",
+          "deadline": null,
+          "completed": false,
+          "favorites": false
+        }
+      ]
+    },
+    {
+      "id": "ked",
+      "password": "Asdf1234*",
+      "fullName": "",
+      "tasks": []
+    },
+    {
+      "id": "keddd",
+      "password": "Asdf1234*",
+      "fullName": "",
+      "tasks": []
+    },
+    {
+      "id": "rge",
+      "password": "Asdf1234*",
+      "fullName": "rge",
+      "tasks": [
+        {
+          "id": "1713751678444",
+          "title": "kkkkjj",
+          "deadline": "1970-01-24T00:00:00.000Z",
+          "completed": false,
+          "favorites": true
+        },
+        {
+          "id": "1713751674393",
+          "title": "jjjj",
+          "deadline": null,
+          "completed": false,
+          "favorites": true
+        }
+      ]
+    },
+    {
+      "id": "abc",
+      "password": "Qwerty@234",
+      "fullName": "jega",
+      "tasks": [
+        {
+          "id": "1713766231094",
+          "title": "qqeq",
+          "deadline": "2024-04-16T06:10:00.000Z",
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1713766078844",
+          "title": "develope skills",
+          "deadline": "2024-04-24T06:07:00.000Z",
+          "completed": true,
+          "favorites": false
+        }
+      ]
+    },
+    {
+      "id": "uiopp",
+      "password": "Uiop123*",
+      "fullName": "uiop",
+      "tasks": [
+        {
+          "id": "1713935945630",
+          "title": "hdvfsaa",
+          "deadline": "1970-01-17T00:00:00.000Z",
+          "completed": true,
+          "favorites": false
+        },
+        {
+          "id": "1713935940844",
+          "title": "fbsdc",
+          "deadline": null,
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1713935929485",
+          "title": "aavv",
+          "deadline": "2024-04-12T05:18:00.000Z",
+          "completed": true,
+          "favorites": false
+        }
+      ]
+    },
+    {
+      "id": "aaaa",
+      "password": "Aaaa123*",
+      "fullName": "aaa",
+      "tasks": []
+    },
+    {
+      "id": "mmm",
+      "password": "Mmmm123*",
+      "fullName": "mmmmmmmmmmmmmmm",
+      "tasks": []
+    },
+    {
+      "id": "Mmm",
+      "password": "Mmmm123*",
+      "fullName": "mmmmmmmmmm",
+      "tasks": []
+    },
+    {
+      "id": "jkk",
+      "password": "Jk@123",
+      "fullName": "jkk",
+      "tasks": []
+    },
+    {
+      "id": "kkk",
+      "password": "Kkkk123*",
+      "fullName": "kkk",
+      "tasks": []
+    },
+    {
+      "id": "a",
+      "password": "a",
+      "fullName": "a",
+      "tasks": [
+        {
+          "id": "1714040587629",
+          "title": "aa",
+          "deadline": null,
+          "completed": false,
+          "favorites": true
+        },
+        {
+          "id": "1714040496266",
+          "title": "lll",
+          "deadline": "1970-01-14T00:00:00.000Z",
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1714040446012",
+          "title": "task 34",
+          "deadline": "2024-05-09T10:20:00.000Z",
+          "completed": false,
+          "favorites": false
+        },
+        {
+          "id": "1714040409145",
+          "title": "task 1",
+          "deadline": "2024-04-27T10:20:00.000Z",
+          "completed": true,
+          "favorites": true
+        }
+      ]
+    },
+    {
+      "id": "kj",
+      "password": "123###qweQWE",
+      "fullName": "kj",
+      "tasks": []
+    },
+    {
+      "id": "mahithaa",
+      "password": "000Mahitha123*",
+      "fullName": "aaa",
+      "tasks": []
+    },
+    {
+      "id": "qqq",
+      "password": "Qqqq123#",
+      "fullName": "qqq",
+      "tasks": []
+    },
+    {
+      "id": "thaar",
+      "password": "Thaar123#",
+      "fullName": "thaarun",
+      "tasks": []
+    },
+    {
+      "id": "kkkk",
+      "password": "Kkkk123*",
+      "fullName": "kkkk",
+      "tasks": []
+    },
+    {
+      "id": "o",
+      "password": "o",
+      "fullName": "o",
+      "financialData": []
+    }
+  ]
+}

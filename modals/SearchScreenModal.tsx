@@ -7,6 +7,7 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Image,
 } from "react-native";
 import DataItem from "../components/DataItem";
 import { useData } from "../store/UserContext";
@@ -79,9 +80,12 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
             keyExtractor={(item) => item.id.toString()}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-            <MaterialIcons name="list-alt" size={32} color="grey" />
+                        <Image
+  source={require('../assets/search.png')}
+  style={{ width: 200, height: 200 }}
+/>
             <Text style={styles.emptyList}>
-             No data found
+             No results found
             </Text>
           </View>
             }
@@ -103,7 +107,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    backgroundColor: "#080705",
+    backgroundColor: "#FFFFFA",
   },
   button: {
     backgroundColor: "#702632",
@@ -122,10 +126,10 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 10,
-    backgroundColor: "#000",
+    backgroundColor: "#fff",
     margin: 20,
     borderRadius: 5,
-    color: "#fff",
+    color: "#080705",
   },
   emptyContainer: {
     justifyContent: "center",

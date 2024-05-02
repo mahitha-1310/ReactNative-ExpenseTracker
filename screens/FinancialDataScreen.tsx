@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   FlatList,
+  Image,
 } from "react-native";
 import DataItem from "../components/DataItem";
 import { useData } from "../store/UserContext";
@@ -65,7 +66,11 @@ const FinancialDataScreen: React.FC<FinancialDataScreenProps> = ({
         keyExtractor={(item) => item.id.toString()}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <MaterialIcons name="list-alt" size={32} color="grey" />
+            {/* <MaterialIcons name="list-alt" size={32} color="grey" /> */}
+            <Image
+  source={require('../assets/financialdata.png')}
+  style={{ width: 200, height: 200 }}
+/>
             <Text style={styles.emptyList}>
               Click on [ + ] to add new Expense/Income
             </Text>
@@ -87,7 +92,7 @@ const FinancialDataScreen: React.FC<FinancialDataScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#080705",
+    backgroundColor: "#FFFFFA",
   },
   emptyContainer: {
     justifyContent: "center",

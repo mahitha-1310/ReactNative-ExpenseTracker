@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Alert,
   Pressable,
+  Image,
 } from "react-native";
 
 import { useData } from "../store/UserContext";
@@ -34,7 +35,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>LOGIN HERE</Text>
+      <Image
+  source={require('../assets/login.png')}
+  style={{ width: 200, height: 200 }}
+/>
+      <Text style={styles.heading}>LOGIN</Text>
       <TextInput
         placeholder="Username"
         value={id}
@@ -49,14 +54,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         style={styles.input}
       />
       <Pressable onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>LOGIN</Text>
+        <Text style={styles.buttonText}>SIGN IN</Text>
       </Pressable>
       <Pressable
         testID="Register"
         onPress={() => navigation.navigate("Register")}
-        style={styles.button}
+        style={styles.secondaryButton}
       >
-        <Text style={styles.buttonText}>DON'T HAVE AN ACCOUNT? REGISTER</Text>
+        <Text style={styles.secondaryButtonText}>Don't have an account? Register</Text>
       </Pressable>
     </View>
   );
@@ -67,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#080705",
+    backgroundColor: "#FFFFFA",
   },
   input: {
     width: "90%",
@@ -82,9 +87,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   heading: {
-    color: "white",
+    color: "#702632",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 22,
     marginVertical: 20,
   },
   button: {
@@ -97,6 +102,13 @@ const styles = StyleSheet.create({
     color: "#FFFFFA",
     fontWeight: "bold",
   },
+  secondaryButton:{
+    marginTop:10,
+  },
+  secondaryButtonText:{
+color:"#702632",
+fontWeight:"bold",
+fontSize:14,}
 });
 
 export default LoginScreen;

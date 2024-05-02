@@ -25,6 +25,7 @@ const TabNavigator: React.FC = () => {
     <Tab.Navigator 
       initialRouteName="FinancialDataScreen"
       activeColor="#cab8d9"
+      // activeColor="#702632"
       inactiveColor="#FAEEEA"
       barStyle={{ backgroundColor: "#702632" }}
       
@@ -45,7 +46,7 @@ const TabNavigator: React.FC = () => {
         options={{
           tabBarLabel: "ANALYSIS",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="star" color={color} size={26} />
+            <MaterialIcons name="bar-chart" color={color} size={26} />
           ),
         }}
       />

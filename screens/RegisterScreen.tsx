@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Pressable,
   Alert,
+  Image,
 } from "react-native";
 import { useData } from "../store/UserContext";
 
@@ -21,7 +22,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
   const handleRegister = () => {
     if (!id.trim() || !password.trim() || !fullName.trim()) {
-      Alert.alert("Error", "Please enter all details");
+      Alert.alert("Registration failed", "Please enter all details");
       return;
     }
     if (fullName.trim().length > 10) {
@@ -33,34 +34,38 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>REGISTER HERE</Text>
+            <Image
+  source={require('../assets/register.png')}
+  style={{ width: 200, height: 200 }}
+/>
+      <Text style={styles.heading}>REGISTRATION</Text>
       <TextInput
-        placeholder="Name"
+        placeholder="Enter Name"
         value={fullName}
         onChangeText={setFullName}
         style={styles.input}
       />
       <TextInput
-        placeholder="Username"
+        placeholder="Enter Username"
         value={id}
         onChangeText={setId}
         style={styles.input}
       />
       <TextInput
-        placeholder="Password"
+        placeholder="Enter Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
         style={styles.input}
       />
       <Pressable onPress={handleRegister} style={styles.button}>
-        <Text style={styles.buttonText}>REGISTER</Text>
+        <Text style={styles.buttonText}>SIGN UP</Text>
       </Pressable>
       <Pressable
         onPress={() => navigation.navigate("Login")}
-        style={styles.button}
+        style={styles.secondaryButton}
       >
-        <Text style={styles.buttonText}>ALREADY HAVE AN ACCOUNT? LOGIN</Text>
+        <Text style={styles.secondaryButtonText}>Already have an account? Login</Text>
       </Pressable>
     </View>
   );
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#080705",
+    backgroundColor: "#FFFFFA",
   },
   input: {
     width: "90%",
@@ -83,9 +88,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   heading: {
-    color: "white",
+    color: "#702632",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 22,
     marginVertical: 20,
   },
   button: {
@@ -98,6 +103,14 @@ const styles = StyleSheet.create({
     color: "#FFFFFA",
     fontWeight: "bold",
   },
+  secondaryButton:{
+    marginTop:10,
+  },
+  secondaryButtonText:{
+color:"#702632",
+fontWeight:"bold",
+fontSize:14,
+  }
 });
 
 export default RegisterScreen;

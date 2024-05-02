@@ -38,7 +38,7 @@ const DataItemModal: React.FC<DataItemModalProps> = ({ data, onClose, onDelete, 
             </View>
             <View style={styles.box}>
               <Text style={styles.label}>Description  :</Text>
-              <Text style={[styles.text, styles.description]}>{data.description}</Text>
+              <Text style={styles.text}>{data.description}</Text>
             </View>
             
           </View>
@@ -64,14 +64,14 @@ const DataItemModal: React.FC<DataItemModalProps> = ({ data, onClose, onDelete, 
 
 const styles = StyleSheet.create({
       modalView: {
-        backgroundColor: "#080705",
+        backgroundColor: "#FFFFFA",
         flex:1,
         alignItems: "center",
         justifyContent:"center",
         width: "100%",
       },
       heading: {
-        color: '#FFFFFA',
+        color: '#080705',
         fontWeight: 'bold',
         fontSize: 20,
         
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
         width: "90%",
         justifyContent:"center",
 marginVertical:30,
+backgroundColor:"#f0f0f0"
       },
       box: {
         flexDirection: "row",
@@ -92,7 +93,7 @@ marginVertical:30,
       label: {
         fontWeight: "bold",
         marginRight: 10,
-        color: "#FFFFFA",
+        color: "#080705",
         fontSize:16,
         width:"30%"
       },
@@ -100,13 +101,10 @@ marginVertical:30,
         flex: 1,
         fontSize:16,
         width:"70%",
-        borderColor:"#ccc",
+        borderColor:"#702632",
         borderWidth:1,
         padding:5,
-        backgroundColor:"#FFFFFA",
-      },
-      description: {
-        fontStyle: "italic",
+        backgroundColor:"#FFF",
       },
       buttonContainer: {
         flexDirection: 'row',

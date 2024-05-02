@@ -53,7 +53,7 @@ const DataItem: React.FC<DataItemProps> = ({ data, onDelete, onEdit }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    backgroundColor: "#FFFFFA",
+    backgroundColor: "#FFF",
     borderWidth: 1.5,
     borderRadius: 5,
     justifyContent: "space-between",

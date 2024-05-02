@@ -202,10 +202,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       const passwordPattern =
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@$%^&*]).{8,}$/;
       if (checkData.length != 0) {
-        Alert.alert("Error", "Username already exists.");
+        Alert.alert("Registration failed", "Username already exists.");
       } else if (!passwordPattern.test(password)) {
         Alert.alert(
-          "Error",
+          "Registration failed",
           "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character (!@$%^&*)"
         );
       } else {

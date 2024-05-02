@@ -4,14 +4,13 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  ImageBackground,
   Pressable,
   Alert,
 } from "react-native";
 import { useData } from "../store/UserContext";
 
 interface RegisterScreenProps {
-  navigation: any; // You may want to replace `any` with a more specific type for navigation props
+  navigation: any;
 }
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
@@ -33,91 +32,70 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground
-      style={styles.background}
-      source={require("../assets/background.jpg")}
-    >
-      <View style={[styles.container, styles.overlay]}>
-        <Text style={styles.heading}>REGISTER HERE</Text>
-        <TextInput
-          placeholder="Name"
-          value={fullName}
-          onChangeText={setFullName}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Username"
-          value={id}
-          onChangeText={setId}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          style={styles.input}
-        />
-        <Pressable
-          
-          onPress={handleRegister}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>REGISTER</Text>
-        </Pressable>
-        <Pressable
-          
-          onPress={() => navigation.navigate("Login")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>ALREADY HAVE AN ACCOUNT? LOGIN</Text>
-        </Pressable>
-      </View>
-    </ImageBackground>
+    <View style={styles.container}>
+      <Text style={styles.heading}>REGISTER HERE</Text>
+      <TextInput
+        placeholder="Name"
+        value={fullName}
+        onChangeText={setFullName}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Username"
+        value={id}
+        onChangeText={setId}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+      <Pressable onPress={handleRegister} style={styles.button}>
+        <Text style={styles.buttonText}>REGISTER</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => navigation.navigate("Login")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>ALREADY HAVE AN ACCOUNT? LOGIN</Text>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#080705",
   },
   input: {
     width: "90%",
     backgroundColor: "white",
-    borderWidth: 1,
-    borderColor: "#000",
+    borderWidth: 2,
+    borderColor: "#702632",
     borderRadius: 5,
     padding: 10,
     marginVertical: 10,
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
   heading: {
-    marginTop: 50,
-    backgroundColor: "rgba(0, 0, 0, 0.80)",
     color: "white",
-    padding: 20,
-    alignSelf: "center",
     fontWeight: "bold",
     fontSize: 18,
-    borderRadius: 50,
+    marginVertical: 20,
   },
   button: {
     marginTop: 20,
-    backgroundColor: "#cd5b45",
+    backgroundColor: "#702632",
     padding: 15,
     borderRadius: 10,
-    alignSelf: "center",
   },
   buttonText: {
-    color: "white",
+    color: "#FFFFFA",
     fontWeight: "bold",
   },
 });

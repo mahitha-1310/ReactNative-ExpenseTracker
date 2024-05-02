@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import DataItemModal from "../modals/DataItemModal";
 
 interface DataItemProps {
   data: any;
@@ -8,54 +9,52 @@ interface DataItemProps {
   onEdit: () => void;
 }
 
-const DataItem: React.FC<DataItemProps> = ({
-data,
-  onDelete,
-  onEdit,
-}) => {
+const DataItem: React.FC<DataItemProps> = ({ data, onDelete, onEdit }) => {
   const date = data.date ? new Date(data.date).toDateString() : "";
+  const isExpense = data.type === "expense";
+  const [modalVisible, setModalVisible] = useState(false);
+  const typeColor = isExpense ? "#912F40" : "#3f8ceb";
+  const amountPrefix = isExpense ? "-" : "+";
 
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
   return (
-    <View style={styles.container}>
-      {/* <TouchableOpacity onPress={onToggleComplete} style={styles.icon}>
-        {task.completed ? (
-          <MaterialIcons name="check" size={20} color="green" />
-        ) : (
-          <MaterialIcons name="circle" size={20} color="black" />
-        )}
-      </TouchableOpacity> */}
-
-      <Text style={[styles.title]}>
-        {data.amount}
-      </Text>
-
-      <Text style={styles.deadline}>{date}</Text>
-
-      <TouchableOpacity onPress={onEdit} style={styles.icon}>
-        <MaterialIcons name="edit" size={20} color="#000" />
+    <>
+      <TouchableOpacity onPress={toggleModal}>
+        <View style={[styles.container, { borderBlockColor: typeColor }]}>
+          <View>
+            <Text style={[styles.title]}>{data.category}</Text>
+            <Text style={styles.date}>{date}</Text>
+          </View>
+          <View style={styles.currencyContainer}>
+            <Text style={[styles.title, { color: typeColor }]}>
+              {amountPrefix}{" "}
+            </Text>
+            <MaterialIcons name="currency-rupee" size={14} color={typeColor} />
+            <Text style={[styles.title, { color: typeColor }]}>
+              {data.amount}
+            </Text>
+          </View>
+        </View>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity onPress={onToggleFavorites} style={styles.icon}>
-        <MaterialIcons
-          name="star"
-          size={20}
-          color={task.favorites ? "orange" : "black"}
+      {modalVisible && (
+        <DataItemModal
+          data={data}
+          onClose={toggleModal}
+          onDelete={onDelete}
+          onEdit={onEdit}
         />
-      </TouchableOpacity> */}
-
-      <TouchableOpacity onPress={onDelete}>
-        <MaterialIcons name="circle" size={20} color="#000" />
-      </TouchableOpacity>
-    </View>
+      )}
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#000",
+    backgroundColor: "#FFFFFA",
+    borderWidth: 1.5,
     borderRadius: 5,
     justifyContent: "space-between",
     alignItems: "center",
@@ -64,20 +63,18 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   title: {
-    flex: 1.5,
     fontSize: 14,
+    fontWeight: "bold",
   },
-  deadline: {
+  date: {
     fontSize: 14,
     color: "gray",
     flex: 0.7,
   },
-  completed: {
-    textDecorationLine: "line-through",
-    color: "gray",
-  },
-  icon: {
-    paddingRight: 10,
+  currencyContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

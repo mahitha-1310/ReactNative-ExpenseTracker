@@ -2,51 +2,53 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-// import Icon from "react-native-vector-icons/FontAwesome";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+
+import { MaterialIcons } from "@expo/vector-icons";
 import { Text, StyleSheet, View } from "react-native";
-import AddTask from "./components/AddTask";
 import Header from "./components/Header";
-import TasksScreen from "./screens/TasksScreen";
-import FavoritesScreen from "./screens/FavoritesScreen";
+
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import { UserProvider } from "./store/UserContext";
 import FinancialDataScreen from "./screens/FinancialDataScreen";
 import AddData from "./components/AddData";
-import { StateProvider } from "./store/StateContext";
+
+import MonthNavigator from "./components/MonthNavigator";
+import AnalysisScreen from "./screens/AnalysisScreen";
+import MonthlySummary from "./components/MonthlySummary";
 
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 const TabNavigator: React.FC = () => {
   return (
-    <Tab.Navigator
+    <Tab.Navigator 
       initialRouteName="FinancialDataScreen"
-      activeColor="#cd5b45"
-      inactiveColor="#FAEEEC"
-      barStyle={{ backgroundColor: "#cd5b45" }}
+      activeColor="#cab8d9"
+      inactiveColor="#FAEEEA"
+      barStyle={{ backgroundColor: "#702632" }}
+      
     >
-      <Tab.Screen
+      <Tab.Screen 
         name="FinancialDataScreen"
-        component={FinancialDataScreen}
+        component={FinancialDataScreen} 
         options={{
-          tabBarLabel: "TASKS",
+          tabBarLabel: "RECORDS",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="list" color={color} size={26} />
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="FavoritesScreen"
-        component={FavoritesScreen}
+        component={AnalysisScreen}
         options={{
-          tabBarLabel: "FAVORITES",
+          tabBarLabel: "ANALYSIS",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="star" color={color} size={26} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
@@ -59,6 +61,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
+      <MonthNavigator/>
+      <MonthlySummary/>
       <TabNavigator />
       {/* <AddTask /> */}
       <AddData/>
@@ -102,14 +106,5 @@ const App: React.FC = () => {
     </UserProvider> 
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    color: "#FAEEEC",
-  },
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

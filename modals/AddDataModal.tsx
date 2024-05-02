@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   Alert,
@@ -12,6 +13,7 @@ import {
 } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-picker/picker";
 
 interface AddDataModalProps {
   visible: boolean;
@@ -24,28 +26,43 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
   onSave,
   onCancel,
 }) => {
-  const [dataTitle, setDataTitle] = useState("");
+  const [amount, setAmount] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [selectedType, setSelectedType] = useState("expense");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const expenseCategories = ["Food", "Rent", "Utilities", "Transportation", "Others"];
+  const incomeCategories = ["Salary", "Freelance", "Investment", "Gifts", "Others"];
+  const [description, setDescription] = useState("");
 
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
+  const handleDescriptionChange = (text: string) => {
+    setDescription(text);
   };
 
+  const categories =
+    selectedType === "expense" ? expenseCategories : incomeCategories;
+
   const addData = () => {
-    if (dataTitle.trim() === "" || selectedDate === null)
-      return Alert.alert("Error", "Data can't be empty.");
+    if (
+      amount.trim() === "" ||
+      selectedDate === null ||
+      selectedCategory === ""
+    )
+      return Alert.alert("Error", "Please fill in all the mandatory fields.");
+    if(
+      description.trim().length>250
+    ) return Alert.alert("Error", "Description can't contain more than 250 characters.");
     const newData = {
       id: String(Date.now()),
-    amount: dataTitle.trim(),
-    type: "expense",
-    date: selectedDate,
-    description: "string",
-    category: "food",
+      amount: amount.trim(),
+      type: selectedType,
+      date: selectedDate,
+      description: description,
+      category: selectedCategory,
     };
-    setDataTitle("");
+    setAmount("");
     setSelectedDate(null);
+    setSelectedCategory("");
     onSave(newData);
   };
 
@@ -75,11 +92,33 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
         <View style={styles.modalView}>
           <Text style={styles.heading}>ADD INCOME/EXPENSE DATA</Text>
 
+          <View style={styles.switchContainer}>
+            <TouchableOpacity
+              style={[
+                styles.typeButton,
+                selectedType === "income" && styles.selectedTypeButton,
+              ]}
+              onPress={() => setSelectedType("income")}
+            >
+              <Text style={styles.switchButtonText}>INCOME</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.typeButton,
+                selectedType === "expense" && styles.selectedTypeButton,
+              ]}
+              onPress={() => setSelectedType("expense")}
+            >
+              <Text style={styles.switchButtonText}>EXPENSE</Text>
+            </TouchableOpacity>
+          </View>
+
           <TextInput
             style={styles.input}
-            placeholder="Data"
-            value={dataTitle}
-            onChangeText={setDataTitle}
+            placeholder="Enter Amount"
+            value={amount}
+            keyboardType="numeric"
+            onChangeText={setAmount}
           />
 
           <View style={[styles.container, styles.input]}>
@@ -109,24 +148,43 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
               />
             )}
           </View>
-
-          <View style={[styles.container]}>
-            <Text>Add to Favorites</Text>
-            <Switch
-              trackColor={{ false: "#767577", true: "#000" }}
-              thumbColor={isEnabled ? "#cd5b45" : "#f4f3f4"}
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
+          <TextInput
+        style={styles.input}
+        placeholder="Enter description (optional)"
+        value={description}
+        onChangeText={handleDescriptionChange}
+      />
+          <View style={styles.categorySelector}>
+            <Picker
+              selectedValue={selectedCategory}
+              onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+            >
+              <Picker.Item label="Select Category" value="" />
+              {selectedType === "expense"
+                ? expenseCategories.map((category) => (
+                    <Picker.Item
+                      key={category}
+                      label={category}
+                      value={category}
+                    />
+                  ))
+                : incomeCategories.map((category) => (
+                    <Picker.Item
+                      key={category}
+                      label={category}
+                      value={category}
+                    />
+                  ))}
+            </Picker>
           </View>
+          
 
           <View style={styles.buttonContainer}>
-            <Pressable style={styles.button} onPress={addData}>
-              <Text style={styles.buttonText}>SAVE</Text>
-            </Pressable>
-
             <Pressable style={styles.button} onPress={onCancel}>
               <Text style={styles.buttonText}>CANCEL</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={addData}>
+              <Text style={styles.buttonText}>SAVE</Text>
             </Pressable>
           </View>
         </View>
@@ -142,7 +200,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   button: {
-    backgroundColor: "#cd5b45",
+    backgroundColor: "#702632",
     margin: 20,
     borderRadius: 10,
   },
@@ -153,9 +211,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   heading: {
-    marginVertical: 20,
-    backgroundColor: "rgba(0, 0, 0, 0.80)",
-    color: "white",
+    color: "black",
     padding: 15,
     fontWeight: "bold",
   },
@@ -165,10 +221,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     width: "100%",
-    marginTop: 30,
   },
   modalView: {
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFA",
     borderRadius: 10,
     padding: 20,
     alignItems: "center",
@@ -177,33 +232,64 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 20,
     textAlign: "center",
-},
-input: {
-  backgroundColor: "#fff",
-  color: "#000",
-  paddingVertical: 5,
-  paddingHorizontal: 10,
-  borderRadius: 5,
-  marginVertical: 5,
-  marginHorizontal: 20,
-  borderWidth: 1,
-  borderColor: "#000",
-  width: "100%",
-},
-container: {
-  flexDirection: "row",
-  alignItems: "center",
-},
-inputContainer: {
-  flex: 1,
-  flexDirection: "row",
-  alignItems: "center",
-  paddingRight: 10,
-},
-clearButton: {
-  marginLeft: 10,
-},
+  },
+  input: {
+    backgroundColor: "#fff",
+    color: "#000",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginVertical: 5,
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "#000",
+    width: "100%",
+  },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingRight: 10,
+  },
+  clearButton: {
+    marginLeft: 10,
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignContent: "space-between",
+  },
+  typeButton: {
+    paddingHorizontal: 20,
+    margin: 10,
+    borderRadius: 50,
+    borderColor: "#702632",
+    borderWidth: 3,
+  },
+  selectedTypeButton: {
+    backgroundColor: "#912F40",
+  },
+  switchButtonText: {
+    color: "black",
+    padding: 10,
+    fontSize: 14,
+    fontWeight: "bold"
+
+  },
+  categorySelector:{
+    backgroundColor: "#fff",
+    color: "#000",
+    borderRadius: 5,
+    marginVertical: 5,
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "#000",
+    width: "100%",
+  }
+  
 });
 
 export default AddDataModal;
-

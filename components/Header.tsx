@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import SearchScreenModal from "../modals/SearchScreenModal";
 import { useData } from "../store/UserContext";
-import { useTask } from "../store/StateContext";
+
 
 interface HeaderProps {
   navigation: any;
@@ -33,10 +33,10 @@ const Header: React.FC<HeaderProps> = ({ navigation }) => {
       </View>
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={handleSearchPress} testID="searchButton">
-          <MaterialIcons name="search" size={32} color="white" />
+          <MaterialIcons name="search" size={32} color="#FFFFFA" />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleLogout}>
-          <MaterialIcons name="exit-to-app" size={32} color="white" />
+          <MaterialIcons name="exit-to-app" size={32} color="#FFFFFA" />
         </TouchableOpacity>
       </View>
       {searchModalVisible && (
@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 80,
     paddingTop: 36,
-    backgroundColor: "#cd5b45",
+    backgroundColor: "#702632",
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
-    color: "white",
+    color: "#FFFFFA",
     fontSize: 20,
     fontWeight: "bold",
   },

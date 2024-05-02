@@ -7,11 +7,11 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  ImageBackground,
 } from "react-native";
-import TaskItem from "../components/TaskItem";
-import { useTask } from "../store/StateContext";
+import DataItem from "../components/DataItem";
+import { useData } from "../store/UserContext";
 import EditDataModal from "./EditDataModal";
+import { MaterialIcons } from "@expo/vector-icons";
 
 interface SearchScreenModalProps {
   visible: boolean;
@@ -24,12 +24,12 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
 }) => {
   const [searchText, setSearchText] = useState("");
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<any>(null); // Adjust type according to your task type
-  const { tasks, deleteTask, editTask} =
-    useTask();
+  const [selectedTask, setSelectedTask] = useState<any>(null); 
+  const { financialData, deleteData, editData} =
+    useData();
 
-  const filteredTasks = tasks.filter((task) =>
-    task.title.toLowerCase().includes(searchText.toLowerCase())
+  const filteredTasks = financialData.filter((data) =>
+    data.amount.toLowerCase().includes(searchText.toLowerCase()) || data.category.toLowerCase().includes(searchText.toLowerCase()) || data.type.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const openEditModal = (task: any) => {
@@ -38,7 +38,7 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
   };
 
   const saveEditedTask = (editedTask: any) => {
-    editTask(editedTask.id, editedTask);
+    editData(editedTask.id, editedTask);
     setEditModalVisible(false);
   };
 
@@ -53,11 +53,7 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-      <ImageBackground
-        style={styles.background}
-        source={require("../assets/background.jpg")}
-      >
-        <View style={styles.overlay}>
+        <View style={styles.container}>
           <Pressable style={styles.button} onPress={onCancel}>
             <Text style={styles.buttonText}>GO BACK</Text>
           </Pressable>
@@ -65,7 +61,7 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
             testID="search"
             style={styles.searchText}
             placeholderTextColor="#d4d5d6"
-            placeholder="Search tasks..."
+            placeholder="Search data..."
             value={searchText}
             onChangeText={setSearchText}
           />
@@ -74,17 +70,20 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
             contentContainerStyle={{ flexGrow: 1 }}
             data={filteredTasks}
             renderItem={({ item }) => (
-              <TaskItem
-                task={item}
-                onDelete={() => deleteTask(item.id)}
+              <DataItem
+                data={item}
+                onDelete={() => deleteData(item.id)}
                 onEdit={() => openEditModal(item)}
               />
             )}
             keyExtractor={(item) => item.id.toString()}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyList}>No tasks found</Text>
-              </View>
+            <MaterialIcons name="list-alt" size={32} color="grey" />
+            <Text style={styles.emptyList}>
+             No data found
+            </Text>
+          </View>
             }
           />
           {selectedTask && (
@@ -96,24 +95,18 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
             />
           )}
         </View>
-      </ImageBackground>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
+
   container: {
-    flex: 1,
-    margin: 20,
-  },
-  text: {
-    color: "yellow",
+    flex:1,
+    backgroundColor: "#080705",
   },
   button: {
-    backgroundColor: "#cd5b45",
+    backgroundColor: "#702632",
     margin: 20,
     borderRadius: 10,
     alignSelf: "flex-start",
@@ -123,10 +116,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   searchText: {
     height: 40,
@@ -141,12 +130,12 @@ const styles = StyleSheet.create({
   emptyContainer: {
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
-    backgroundColor: "grey",
+    marginTop: 30,
   },
   emptyList: {
-    fontSize: 16,
-    color: "black",
+    fontSize: 14,
+    color: "grey",
+    marginTop: 10,
   },
   flatlist:{
 

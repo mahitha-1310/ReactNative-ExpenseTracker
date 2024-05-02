@@ -26,7 +26,7 @@ const AddData: React.FC<AddDataProps> = () => {
   return (
     <>
       <TouchableOpacity style={styles.button} onPress={openAddModal}>
-        <MaterialIcons name="add" size={20} color="white" />
+        <MaterialIcons name="add" size={32} color="#FFFFFA" />
       </TouchableOpacity>
       {addModalVisible && (
         <AddDataModal
@@ -45,11 +45,10 @@ const styles = StyleSheet.create({
     bottom: 100,
     right: 5,
     alignSelf: "flex-end",
-    backgroundColor: "black",
+    backgroundColor: "#080705",
     borderRadius: 10,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    borderColor: "#cd5b45",
+padding:15,
+    borderColor: "#702632",
     borderWidth: 3,
   },
 });

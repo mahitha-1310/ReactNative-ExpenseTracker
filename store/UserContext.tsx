@@ -3,11 +3,13 @@ import axios from "axios";
 import { Alert } from "react-native";
 import { User } from "../interfaces/User";
 import { FinancialData } from "../interfaces/FinancialData";
+import moment, { Moment } from "moment";
 
 interface State {
   username: string;
   financialData: FinancialData[];
   fullName: string;
+  currentDate: Moment;
 }
 
 interface ExtendedState extends State {
@@ -27,6 +29,8 @@ interface ExtendedState extends State {
     loginSuccess: () => void
   ) => void;
   logout: (navigation: any) => void;
+  monthIncrease: () => void;
+  monthDecrease: () => void;
 }
 
 type Action =
@@ -38,7 +42,9 @@ type Action =
   | { type: "ADD_DATA"; payload: FinancialData }
   | { type: "EDIT_DATA"; payload: { id: string; updatedData: FinancialData } }
   | { type: "DELETE_DATA"; payload: string }
-  | { type: "LOG_OUT" };
+  | { type: "LOG_OUT" }
+  | { type: "DECREASE_MONTH" }
+  | { type: "INCREASE_MONTH" };
 
 const UserContext = createContext<ExtendedState | undefined>(undefined);
 
@@ -46,9 +52,11 @@ const initialState: State = {
   username: "",
   financialData: [],
   fullName: "",
+  currentDate: moment(),
 };
 
-const BASE_URL = "http://10.0.2.2:3000";
+// const BASE_URL = "http://10.0.2.2:3000";
+const BASE_URL = "https://expensetrackerbackend-92np.onrender.com";
 
 const stateReducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -88,7 +96,18 @@ const stateReducer = (state: State, action: Action): State => {
         ...state,
         username: "",
         financialData: [],
+        currentDate: moment()
       };
+      case "DECREASE_MONTH":
+        return {
+          ...state,
+          currentDate: state.currentDate.clone().subtract(1, "month"),
+        };
+      case "INCREASE_MONTH":
+        return {
+          ...state,
+          currentDate: state.currentDate.clone().add(1, "month"),
+        };
     default:
       return state;
   }
@@ -130,11 +149,12 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       );
 
       if (dataIndex !== -1) {
+  
         user.financialData[dataIndex] = updatedData;
         await axios.put(`${BASE_URL}/users/${user.id}`, user);
         dispatch({
           type: "EDIT_DATA",
-          payload: { id: dataIndex, updatedData },
+          payload: { id: dataId, updatedData },
         });
       } else {
         console.error("Data not found");
@@ -249,18 +269,29 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     ]);
   };
 
+  const monthIncrease = () =>{
+    dispatch({type:"INCREASE_MONTH"})
+  }
+
+  const monthDecrease = () =>{
+    dispatch({type:"DECREASE_MONTH"})
+  }
+
   return (
     <UserContext.Provider
       value={{
         financialData: state.financialData,
         username: state.username,
         fullName: state.fullName,
+        currentDate: state.currentDate,
         addData,
         editData,
         deleteData,
         onRegister,
         onLogin,
         logout,
+        monthIncrease,
+        monthDecrease
       }}
     >
       {children}

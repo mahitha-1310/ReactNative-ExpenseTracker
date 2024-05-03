@@ -39,19 +39,18 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
     setDescription(text);
   };
 
-  const categories =
-    selectedType === "expense" ? expenseCategories : incomeCategories;
-
   const addData = () => {
     if (
       amount.trim() === "" ||
       selectedDate === null ||
       selectedCategory === ""
     )
-      return Alert.alert("Error", "Please fill in all the mandatory fields.");
+      return Alert.alert("", "Please fill in all the mandatory fields.");
+    if(!(/^\d*\.?\d*$/.test(amount.trim())))
+      return Alert.alert("", "Please enter valid amount.");
     if(
       description.trim().length>250
-    ) return Alert.alert("Error", "Description can't contain more than 250 characters.");
+    ) return Alert.alert("", "Description can't contain more than 250 characters.");
     const newData = {
       id: String(Date.now()),
       amount: amount.trim(),
@@ -100,7 +99,7 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
               ]}
               onPress={() => setSelectedType("income")}
             >
-              <Text style={styles.switchButtonText}>INCOME</Text>
+              <Text style={[styles.switchButtonText, selectedType === "income" && styles.selectedTypeButtonText]}>INCOME</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -109,7 +108,7 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
               ]}
               onPress={() => setSelectedType("expense")}
             >
-              <Text style={styles.switchButtonText}>EXPENSE</Text>
+              <Text style={[styles.switchButtonText, selectedType === "expense" && styles.selectedTypeButtonText]}>EXPENSE</Text>
             </TouchableOpacity>
           </View>
 
@@ -203,6 +202,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#702632",
     margin: 20,
     borderRadius: 10,
+    width:"30%",
+    alignItems:"center"
   },
   buttonText: {
     padding: 10,
@@ -288,6 +289,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     width: "100%",
+  },
+  selectedTypeButtonText:{
+    color:"#FFFFFA"
   }
   
 });

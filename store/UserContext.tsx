@@ -236,7 +236,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       );
       const data = await response.json();
       if (data.length === 0) {
-        Alert.alert("Error", "Enter correct credentials");
+        Alert.alert("Login failed", "Enter correct credentials");
       } else {
         const user = data[0];
 
@@ -257,7 +257,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   };
 
   const logout = (navigation: any) => {
-    Alert.alert("Log Out", "Are you sure you want to log out?", [
+    Alert.alert("Logout", "Are you sure you want to logout?", [
       { text: "Cancel", style: "cancel" },
       {
         text: "Logout",

@@ -13,7 +13,7 @@ const DataItem: React.FC<DataItemProps> = ({ data, onDelete, onEdit }) => {
   const date = data.date ? new Date(data.date).toDateString() : "";
   const isExpense = data.type === "expense";
   const [modalVisible, setModalVisible] = useState(false);
-  const typeColor = isExpense ? "#912F40" : "#3f8ceb";
+  const typeColor = isExpense ? "#912F40" : "#5576a3";
   const amountPrefix = isExpense ? "-" : "+";
 
   const toggleModal = () => {

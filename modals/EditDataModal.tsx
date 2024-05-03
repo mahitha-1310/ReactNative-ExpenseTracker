@@ -50,10 +50,12 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
       editedDate === null ||
       editedCategory === ""
     )
-    return Alert.alert("Error", "Please fill in all the mandatory fields.");
+    return Alert.alert("", "Please fill in all the mandatory fields.");
+    if(!(/^\d*\.?\d*$/.test(editedAmount.trim())))
+      return Alert.alert("", "Please enter valid amount.");
     if(
       editedDescription.trim().length>250
-    ) return Alert.alert("Error", "Description can't contain more than 250 characters.");
+    ) return Alert.alert("", "Description can't contain more than 250 characters.");
     onSave({
       ...data,
       amount: editedAmount.trim(),
@@ -102,7 +104,7 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
               ]}
               onPress={() => setEditedType("income")}
             >
-              <Text style={styles.switchButtonText}>INCOME</Text>
+              <Text style={[styles.switchButtonText, editedType === "income" && styles.selectedTypeButtonText]}>INCOME</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -111,7 +113,7 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
               ]}
               onPress={() => setEditedType("expense")}
             >
-              <Text style={styles.switchButtonText}>EXPENSE</Text>
+              <Text style={[styles.switchButtonText, editedType === "expense" && styles.selectedTypeButtonText]}>EXPENSE</Text>
             </TouchableOpacity>
           </View>
 
@@ -205,6 +207,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#702632",
     margin: 20,
     borderRadius: 10,
+    width:"30%",
+    alignItems:"center"
   },
   buttonText: {
     padding: 10,
@@ -290,6 +294,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     width: "100%",
+  },
+  selectedTypeButtonText:{
+    color:"#FFFFFA"
   }
   
 });

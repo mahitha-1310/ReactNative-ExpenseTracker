@@ -12,7 +12,7 @@ interface DataItemModalProps {
 
 const DataItemModal: React.FC<DataItemModalProps> = ({ data, onClose, onDelete, onEdit }) => {
     const type = data.type==="expense"?"EXPENSE":"INCOME"
-    const typeColor = data.type==="expense"?"#912F40" : "#3f8ceb"
+    const typeColor = data.type==="expense"?"#912F40" : "#5576a3"
   return (
     <Modal visible={true} animationType="slide">
 
@@ -118,7 +118,8 @@ backgroundColor:"#f0f0f0"
         padding: 10,
         borderRadius: 10,
         backgroundColor: '#702632',
-        margin:10
+        margin:10,
+        width:"30%"
       },
       buttonText: {
         marginLeft: 5,

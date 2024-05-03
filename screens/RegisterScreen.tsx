@@ -58,6 +58,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
       />
+      <Text style={styles.text}>Password must be 8+ characters with 1 uppercase and 1 special character.</Text>
       <Pressable onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>SIGN UP</Text>
       </Pressable>
@@ -110,6 +111,10 @@ const styles = StyleSheet.create({
 color:"#702632",
 fontWeight:"bold",
 fontSize:14,
+  },
+  text:{
+    fontSize:10,
+    color:"grey"
   }
 });
 

@@ -1,111 +1,7 @@
-// import React from "react";
-// import { View, Text, StyleSheet,Image } from "react-native";
-// import { PieChart } from "react-native-chart-kit";
-// import moment from "moment";
-// import { useData } from "../store/UserContext";
-// import { MaterialIcons } from "@expo/vector-icons";
 
-// const AnalysisScreen: React.FC = () => {
-//   const { financialData, currentDate } = useData();
-
-//   const currentMonthData = financialData.filter((item) => {
-//     const itemMonth = moment(item.date).month();
-//     const itemYear = moment(item.date).year();
-//     return itemMonth === currentDate.month() && itemYear === currentDate.year();
-//   });
-
-//   let totalExpenses = 0;
-//   let totalIncome = 0;
-//   currentMonthData.forEach((item) => {
-//     if (item.type === "expense") {
-//       totalExpenses += parseFloat(item.amount);
-//     } else {
-//       totalIncome += parseFloat(item.amount);
-//     }
-//   });
-
-//   const data = [
-//     {
-//       name: "EXPENSE",
-//       amount: totalExpenses,
-//       color: "#912F40",
-//       legendFontColor: "#080705",
-//       legendFontSize: 14,
-//     },
-//     {
-//       name: "INCOME",
-//       amount: totalIncome,
-//       color: "#3f8ceb",
-//       legendFontColor: "#080705",
-//       legendFontSize: 14,
-//     },
-//   ];
-
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>ACCOUNT OVERVIEW</Text>
-//       {totalExpenses > 0 || totalIncome > 0 ? (
-//         <PieChart
-//           style={styles.piechart}
-//           data={data}
-//           width={350}
-//           height={200}
-//           chartConfig={{
-//             backgroundColor: "#ffffff",
-//             decimalPlaces: 2,
-//             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-//           }}
-//           accessor="amount"
-//           backgroundColor="transparent"
-//           paddingLeft="0"
-//           absolute
-//         />
-//       ) : (
-//         <View style={styles.emptyContainer}>
-//           {/* <MaterialIcons name="bar-chart" size={32} color="grey" /> */}
-//           <Image
-//   source={require('../assets/analytics.png')}
-//   style={{ width: 200, height: 200 }}
-// />
-//           <Text style={styles.emptyList}>No analysis for this month</Text>
-//         </View>
-//       )}
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     alignItems: "center",
-//     backgroundColor: "#FFFFFA",
-//     flex: 1,
-//   },
-//   title: {
-//     fontSize: 16,
-//     fontWeight: "bold",
-//     color: "#080705",
-//     marginVertical: 20,
-//   },
-//   piechart: {
-//     marginTop: 40,
-//   },
-//   emptyContainer: {
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 30,
-//   },
-//   emptyList: {
-//     fontSize: 14,
-//     color: "grey",
-//     marginTop: 10,
-//   },
-// });
-
-// export default AnalysisScreen;
 
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Switch } from "react-native";
+import { View, Text, StyleSheet, Image, Switch, ViewStyle, StyleProp } from "react-native";
 import { PieChart, StackedBarChart } from "react-native-chart-kit";
 import moment from "moment";
 import { useData } from "../store/UserContext";
@@ -118,7 +14,6 @@ const AnalysisScreen: React.FC = () => {
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
-    console.log(isEnabled)
   };
 
 
@@ -132,6 +27,9 @@ const AnalysisScreen: React.FC = () => {
   let totalIncome = 0;
   let expenseCategories: { [category: string]: number } = {};
   let incomeCategories: { [category: string]: number } = {};
+  const expensePercentage=`${((totalExpenses / (totalExpenses + totalIncome)) * 100).toFixed(2)}%`;
+  const incomePercentage = (totalIncome / (totalExpenses + totalIncome)) * 100;
+  const incomePercentageFormatted = incomePercentage.toFixed(2) + "%";
 
   currentMonthData.forEach((item) => {
     if (item.type === "expense") {
@@ -162,7 +60,7 @@ const AnalysisScreen: React.FC = () => {
     {
       name: "INCOME",
       amount: totalIncome,
-      color: "#3f8ceb",
+      color: "#5576a3",
       legendFontColor: "#080705",
       legendFontSize: 14,
     },
@@ -173,8 +71,7 @@ const AnalysisScreen: React.FC = () => {
     labels: Object.keys(expenseCategories),
     datasets: [
       {
-        data: Object.values(expenseCategories),
-        color: (opacity = 1) => `rgba(145, 47, 64, ${opacity})`, // expense color
+        data: Object.values(expenseCategories), 
       },
     ],
   };
@@ -185,10 +82,10 @@ const AnalysisScreen: React.FC = () => {
     datasets: [
       {
         data: Object.values(incomeCategories),
-        color: (opacity = 1) => `rgba(63, 140, 235, ${opacity})`, // income color
       },
     ],
   };
+
 
   return (
     <View style={styles.container}>
@@ -221,6 +118,20 @@ const AnalysisScreen: React.FC = () => {
             paddingLeft="0"
             absolute
           />
+  <View style={styles.horizontalBarContainer}>
+      <Text style={styles.label}>Expense</Text>
+      <View style={[styles.barContainer, { backgroundColor: "#f0f0f0" }]}>
+      <View style={{ width: `${((totalExpenses / (totalExpenses + totalIncome)) * 100).toFixed(2)}%`, height: '100%', backgroundColor: "#912F40" } as StyleProp<ViewStyle>}/>
+      </View>
+      <Text style={styles.progressText}>{`${((totalExpenses / (totalExpenses + totalIncome)) * 100).toFixed(2)}%`}</Text>
+</View>
+<View style={styles.horizontalBarContainer}>
+      <Text style={styles.label}>Income</Text>
+      <View style={[styles.barContainer, { backgroundColor: "#f0f0f0" }]}>
+      <View style={{ width: `${((totalIncome / (totalExpenses + totalIncome)) * 100).toFixed(2)}%`, height: '100%', backgroundColor: "#5576a3" } as StyleProp<ViewStyle>}/>
+      </View>
+      <Text style={styles.progressText}>{`${((totalIncome / (totalExpenses + totalIncome)) * 100).toFixed(2)}%`}</Text>
+</View>
   </>):(<><Text style={styles.chartTitle}>EXPENSE ANALYSIS</Text>
       <BarChart
         style={styles.barChart}
@@ -247,7 +158,7 @@ const AnalysisScreen: React.FC = () => {
           backgroundGradientFrom: "#FFFFFA",
           backgroundGradientTo: "#FFFFFA",
           decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(63, 140, 235, ${opacity})`,
+          color: (opacity = 1) => `rgba(85, 118, 163, ${opacity})`,
         }}
       />
       </>)}
@@ -305,6 +216,34 @@ alignItems:"center"
   },
   barChart: {
     marginTop: 10,
+  },
+  horizontalBarContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 15,
+    width:"90%"
+  },
+  label: {
+    marginRight: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#080705',
+    flex:0.3
+  },
+  barContainer: {
+    flex: 1,
+    height: 20,
+    borderRadius: 5,
+    overflow: 'hidden',
+  
+
+  },
+  progressText: {
+    marginLeft: 10,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#080705',
+    flex:0.3
   },
 });
 

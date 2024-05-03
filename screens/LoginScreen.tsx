@@ -36,9 +36,9 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-  source={require('../assets/login.png')}
-  style={{ width: 200, height: 200 }}
-/>
+        source={require("../assets/login.png")}
+        style={{ width: 200, height: 200 }}
+      />
       <Text style={styles.heading}>LOGIN</Text>
       <TextInput
         placeholder="Username"
@@ -61,7 +61,9 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         onPress={() => navigation.navigate("Register")}
         style={styles.secondaryButton}
       >
-        <Text style={styles.secondaryButtonText}>Don't have an account? Register</Text>
+        <Text style={styles.secondaryButtonText}>
+          Don't have an account? Register
+        </Text>
       </Pressable>
     </View>
   );
@@ -102,13 +104,14 @@ const styles = StyleSheet.create({
     color: "#FFFFFA",
     fontWeight: "bold",
   },
-  secondaryButton:{
-    marginTop:10,
+  secondaryButton: {
+    marginTop: 10,
   },
-  secondaryButtonText:{
-color:"#702632",
-fontWeight:"bold",
-fontSize:14,}
+  secondaryButtonText: {
+    color: "#702632",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
 });
 
 export default LoginScreen;

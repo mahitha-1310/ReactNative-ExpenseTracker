@@ -4,7 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useData } from "../store/UserContext";
 
 const MonthNavigator: React.FC = () => {
-  const {monthDecrease,monthIncrease,currentDate} = useData();
+  const { monthDecrease, monthIncrease, currentDate } = useData();
 
   const decreaseMonth = () => {
     monthDecrease();
@@ -15,14 +15,11 @@ const MonthNavigator: React.FC = () => {
   };
 
   return (
-    
     <View style={styles.container}>
       <TouchableOpacity onPress={decreaseMonth}>
         <MaterialIcons name="keyboard-arrow-left" size={24} />
       </TouchableOpacity>
-      <Text style={styles.monthYearText}>
-        {currentDate.format("MMM YYYY")}
-      </Text>
+      <Text style={styles.monthYearText}>{currentDate.format("MMM YYYY")}</Text>
       <TouchableOpacity onPress={increaseMonth}>
         <MaterialIcons name="keyboard-arrow-right" size={24} />
       </TouchableOpacity>

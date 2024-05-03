@@ -17,22 +17,20 @@ import MonthNavigator from "./components/MonthNavigator";
 import AnalysisScreen from "./screens/AnalysisScreen";
 import MonthlySummary from "./components/MonthlySummary";
 
-
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 const TabNavigator: React.FC = () => {
   return (
-    <Tab.Navigator 
+    <Tab.Navigator
       initialRouteName="FinancialDataScreen"
       activeColor="#cab8d9"
       // activeColor="#702632"
       inactiveColor="#FAEEEA"
       barStyle={{ backgroundColor: "#702632" }}
-      
     >
-      <Tab.Screen 
+      <Tab.Screen
         name="FinancialDataScreen"
-        component={FinancialDataScreen} 
+        component={FinancialDataScreen}
         options={{
           tabBarLabel: "RECORDS",
           tabBarIcon: ({ color }) => (
@@ -55,18 +53,18 @@ const TabNavigator: React.FC = () => {
 };
 
 interface HomeScreenProps {
-  navigation: any; 
+  navigation: any;
 }
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <MonthNavigator/>
-      <MonthlySummary/>
+      <MonthNavigator />
+      <MonthlySummary />
       <TabNavigator />
       {/* <AddTask /> */}
-      <AddData/>
+      <AddData />
     </View>
   );
 };
@@ -104,7 +102,7 @@ const App: React.FC = () => {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </UserProvider> 
+    </UserProvider>
   );
 };
 

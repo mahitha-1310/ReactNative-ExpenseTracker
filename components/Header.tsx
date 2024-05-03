@@ -5,7 +5,6 @@ import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import SearchScreenModal from "../modals/SearchScreenModal";
 import { useData } from "../store/UserContext";
 
-
 interface HeaderProps {
   navigation: any;
 }

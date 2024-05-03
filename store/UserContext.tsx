@@ -96,18 +96,18 @@ const stateReducer = (state: State, action: Action): State => {
         ...state,
         username: "",
         financialData: [],
-        currentDate: moment()
+        currentDate: moment(),
       };
-      case "DECREASE_MONTH":
-        return {
-          ...state,
-          currentDate: state.currentDate.clone().subtract(1, "month"),
-        };
-      case "INCREASE_MONTH":
-        return {
-          ...state,
-          currentDate: state.currentDate.clone().add(1, "month"),
-        };
+    case "DECREASE_MONTH":
+      return {
+        ...state,
+        currentDate: state.currentDate.clone().subtract(1, "month"),
+      };
+    case "INCREASE_MONTH":
+      return {
+        ...state,
+        currentDate: state.currentDate.clone().add(1, "month"),
+      };
     default:
       return state;
   }
@@ -149,7 +149,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       );
 
       if (dataIndex !== -1) {
-  
         user.financialData[dataIndex] = updatedData;
         await axios.put(`${BASE_URL}/users/${user.id}`, user);
         dispatch({
@@ -269,13 +268,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     ]);
   };
 
-  const monthIncrease = () =>{
-    dispatch({type:"INCREASE_MONTH"})
-  }
+  const monthIncrease = () => {
+    dispatch({ type: "INCREASE_MONTH" });
+  };
 
-  const monthDecrease = () =>{
-    dispatch({type:"DECREASE_MONTH"})
-  }
+  const monthDecrease = () => {
+    dispatch({ type: "DECREASE_MONTH" });
+  };
 
   return (
     <UserContext.Provider
@@ -291,7 +290,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         onLogin,
         logout,
         monthIncrease,
-        monthDecrease
+        monthDecrease,
       }}
     >
       {children}

@@ -34,10 +34,10 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-            <Image
-  source={require('../assets/register.png')}
-  style={{ width: 200, height: 200 }}
-/>
+      <Image
+        source={require("../assets/register.png")}
+        style={{ width: 200, height: 200 }}
+      />
       <Text style={styles.heading}>REGISTRATION</Text>
       <TextInput
         placeholder="Enter Name"
@@ -58,7 +58,9 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
       />
-      <Text style={styles.text}>Password must be 8+ characters with 1 uppercase and 1 special character.</Text>
+      <Text style={styles.text}>
+        Password must be 8+ characters with 1 uppercase and 1 special character.
+      </Text>
       <Pressable onPress={handleRegister} style={styles.button}>
         <Text style={styles.buttonText}>SIGN UP</Text>
       </Pressable>
@@ -66,7 +68,9 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
         onPress={() => navigation.navigate("Login")}
         style={styles.secondaryButton}
       >
-        <Text style={styles.secondaryButtonText}>Already have an account? Login</Text>
+        <Text style={styles.secondaryButtonText}>
+          Already have an account? Login
+        </Text>
       </Pressable>
     </View>
   );
@@ -104,18 +108,18 @@ const styles = StyleSheet.create({
     color: "#FFFFFA",
     fontWeight: "bold",
   },
-  secondaryButton:{
-    marginTop:10,
+  secondaryButton: {
+    marginTop: 10,
   },
-  secondaryButtonText:{
-color:"#702632",
-fontWeight:"bold",
-fontSize:14,
+  secondaryButtonText: {
+    color: "#702632",
+    fontWeight: "bold",
+    fontSize: 14,
   },
-  text:{
-    fontSize:10,
-    color:"grey"
-  }
+  text: {
+    fontSize: 10,
+    color: "grey",
+  },
 });
 
 export default RegisterScreen;

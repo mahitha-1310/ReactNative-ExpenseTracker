@@ -26,21 +26,32 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
   onSave,
   onCancel,
 }) => {
-
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [editedAmount, setEditedAmount] = useState(data.amount);
   const [editedDate, setEditedDate] = useState(data.date);
   const [editedType, setEditedType] = useState(data.type);
   const [editedCategory, setEditedCategory] = useState(data.category);
   const [editedDescription, setEditedDescription] = useState(data.description);
-  const expenseCategories = ["Food", "Rent", "Utilities", "Transportation", "Others"];
-  const incomeCategories = ["Salary", "Freelance", "Investment", "Gifts", "Others"];
+  const expenseCategories = [
+    "Food",
+    "Rent",
+    "Utilities",
+    "Transportation",
+    "Others",
+  ];
+  const incomeCategories = [
+    "Salary",
+    "Freelance",
+    "Investment",
+    "Gifts",
+    "Others",
+  ];
 
   useEffect(() => {
     setEditedAmount(data.amount);
     setEditedDate(data.date);
     setEditedCategory(data.category);
-    setEditedType(data.type)
+    setEditedType(data.type);
     setEditedDescription(data.description);
   }, [visible]);
 
@@ -50,19 +61,21 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
       editedDate === null ||
       editedCategory === ""
     )
-    return Alert.alert("", "Please fill in all the mandatory fields.");
-    if(!(/^\d*\.?\d*$/.test(editedAmount.trim())))
+      return Alert.alert("", "Please fill in all the mandatory fields.");
+    if (!/^\d*\.?\d*$/.test(editedAmount.trim()))
       return Alert.alert("", "Please enter valid amount.");
-    if(
-      editedDescription.trim().length>250
-    ) return Alert.alert("", "Description can't contain more than 250 characters.");
+    if (editedDescription.trim().length > 250)
+      return Alert.alert(
+        "",
+        "Description can't contain more than 250 characters."
+      );
     onSave({
       ...data,
       amount: editedAmount.trim(),
       type: editedType,
       date: editedDate,
       description: editedDescription,
-      category: editedCategory
+      category: editedCategory,
     });
   };
 
@@ -104,7 +117,14 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
               ]}
               onPress={() => setEditedType("income")}
             >
-              <Text style={[styles.switchButtonText, editedType === "income" && styles.selectedTypeButtonText]}>INCOME</Text>
+              <Text
+                style={[
+                  styles.switchButtonText,
+                  editedType === "income" && styles.selectedTypeButtonText,
+                ]}
+              >
+                INCOME
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -113,7 +133,14 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
               ]}
               onPress={() => setEditedType("expense")}
             >
-              <Text style={[styles.switchButtonText, editedType === "expense" && styles.selectedTypeButtonText]}>EXPENSE</Text>
+              <Text
+                style={[
+                  styles.switchButtonText,
+                  editedType === "expense" && styles.selectedTypeButtonText,
+                ]}
+              >
+                EXPENSE
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -153,11 +180,11 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
             )}
           </View>
           <TextInput
-        style={styles.input}
-        placeholder="Enter description (optional)"
-        value={editedDescription}
-        onChangeText={handleDescriptionChange}
-      />
+            style={styles.input}
+            placeholder="Enter description (optional)"
+            value={editedDescription}
+            onChangeText={handleDescriptionChange}
+          />
           <View style={styles.categorySelector}>
             <Picker
               selectedValue={editedCategory}
@@ -181,7 +208,6 @@ const EditDataModal: React.FC<EditDataModalProps> = ({
                   ))}
             </Picker>
           </View>
-          
 
           <View style={styles.buttonContainer}>
             <Pressable style={styles.button} onPress={onCancel}>
@@ -207,8 +233,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#702632",
     margin: 20,
     borderRadius: 10,
-    width:"30%",
-    alignItems:"center"
+    width: "30%",
+    alignItems: "center",
   },
   buttonText: {
     padding: 10,
@@ -282,10 +308,9 @@ const styles = StyleSheet.create({
     color: "black",
     padding: 10,
     fontSize: 14,
-    fontWeight: "bold"
-
+    fontWeight: "bold",
   },
-  categorySelector:{
+  categorySelector: {
     backgroundColor: "#fff",
     color: "#000",
     borderRadius: 5,
@@ -295,10 +320,9 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     width: "100%",
   },
-  selectedTypeButtonText:{
-    color:"#FFFFFA"
-  }
-  
+  selectedTypeButtonText: {
+    color: "#FFFFFA",
+  },
 });
 
 export default EditDataModal;

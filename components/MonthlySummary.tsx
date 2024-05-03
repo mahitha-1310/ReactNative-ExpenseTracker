@@ -28,14 +28,13 @@ const MonthlySummary: React.FC = () => {
 
   const monthlyTotal = monthlyIncome - monthlyExpense;
 
-  let totalColor = "#912F40"; 
+  let totalColor = "#912F40";
   if (monthlyIncome > monthlyExpense) {
-    totalColor = "#5576a3"; 
+    totalColor = "#5576a3";
   }
 
   return (
     <View style={styles.container}>
-
       <View style={styles.summaryItem}>
         <Text style={[styles.text, { color: "#080705" }]}>Expense </Text>
         <View style={styles.amount}>
@@ -65,7 +64,6 @@ const MonthlySummary: React.FC = () => {
           </Text>
         </View>
       </View>
-
     </View>
   );
 };

@@ -24,13 +24,11 @@
 //   const [editModalVisible, setEditModalVisible] = useState(false);
 //   const [selectedData, setSelectedData] = useState<any>(null);
 //   const { currentDate, financialData, deleteData, editData } = useData();
-  
+
 //   const [enabled, setEnabled] = useState(false)
 
 //   const currentMonth = currentDate.month() + 1;
 //   const currentYear = currentDate.year();
-  
-
 
 //   const filteredFinancialData = financialData.filter((item) => {
 //     const itemMonth = moment(item.date).month() + 1;
@@ -57,7 +55,6 @@
 //   const cancelEditModal = () => {
 //     setEditModalVisible(false);
 //   };
-
 
 //     const sortedData = [...filteredFinancialData].sort((a, b) =>
 //       moment(a.date).isBefore(moment(b.date)) ? -1 : 1
@@ -208,7 +205,10 @@ const FinancialDataScreen: React.FC<FinancialDataScreenProps> = ({
     <View style={styles.container}>
       <View style={styles.sortButtons}>
         <TouchableOpacity
-          style={[styles.sortButton, sortBy === "default" && styles.activeButton]}
+          style={[
+            styles.sortButton,
+            sortBy === "default" && styles.activeButton,
+          ]}
           onPress={() => setSortBy("default")}
         >
           <MaterialIcons name="sort" size={24} />
@@ -242,7 +242,7 @@ const FinancialDataScreen: React.FC<FinancialDataScreenProps> = ({
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Image
-              source={require('../assets/financialdata.png')}
+              source={require("../assets/financialdata.png")}
               style={{ width: 200, height: 200 }}
             />
             <Text style={styles.emptyList}>
@@ -301,5 +301,3 @@ const styles = StyleSheet.create({
 });
 
 export default FinancialDataScreen;
-
-

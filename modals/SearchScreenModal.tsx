@@ -25,12 +25,15 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
 }) => {
   const [searchText, setSearchText] = useState("");
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<any>(null); 
-  const { financialData, deleteData, editData} =
-    useData();
+  const [selectedTask, setSelectedTask] = useState<any>(null);
+  const { financialData, deleteData, editData } = useData();
 
-  const filteredTasks = financialData.filter((data) =>
-    data.amount.toLowerCase().includes(searchText.toLowerCase()) || data.category.toLowerCase().includes(searchText.toLowerCase()) || data.type.toLowerCase().includes(searchText.toLowerCase()) || data.description.toLowerCase().includes(searchText.toLowerCase())
+  const filteredTasks = financialData.filter(
+    (data) =>
+      data.amount.toLowerCase().includes(searchText.toLowerCase()) ||
+      data.category.toLowerCase().includes(searchText.toLowerCase()) ||
+      data.type.toLowerCase().includes(searchText.toLowerCase()) ||
+      data.description.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const openEditModal = (task: any) => {
@@ -54,59 +57,56 @@ const SearchScreenModal: React.FC<SearchScreenModalProps> = ({
       visible={visible}
       onRequestClose={onCancel}
     >
-        <View style={styles.container}>
-          <Pressable style={styles.button} onPress={onCancel}>
-            <Text style={styles.buttonText}>GO BACK</Text>
-          </Pressable>
-          <TextInput
-            testID="search"
-            style={styles.searchText}
-            placeholderTextColor="#d4d5d6"
-            placeholder="Search data..."
-            value={searchText}
-            onChangeText={setSearchText}
-          />
-          <FlatList
-            style={styles.flatlist}
-            contentContainerStyle={{ flexGrow: 1 }}
-            data={filteredTasks}
-            renderItem={({ item }) => (
-              <DataItem
-                data={item}
-                onDelete={() => deleteData(item.id)}
-                onEdit={() => openEditModal(item)}
-              />
-            )}
-            keyExtractor={(item) => item.id.toString()}
-            ListEmptyComponent={
-              <View style={styles.emptyContainer}>
-                        <Image
-  source={require('../assets/search.png')}
-  style={{ width: 200, height: 200 }}
-/>
-            <Text style={styles.emptyList}>
-             No results found
-            </Text>
-          </View>
-            }
-          />
-          {selectedTask && (
-            <EditDataModal
-              visible={editModalVisible}
-              data={selectedTask}
-              onSave={saveEditedTask}
-              onCancel={cancelEditModal}
+      <View style={styles.container}>
+        <Pressable style={styles.button} onPress={onCancel}>
+          <Text style={styles.buttonText}>GO BACK</Text>
+        </Pressable>
+        <TextInput
+          testID="search"
+          style={styles.searchText}
+          placeholderTextColor="#d4d5d6"
+          placeholder="Search data..."
+          value={searchText}
+          onChangeText={setSearchText}
+        />
+        <FlatList
+          style={styles.flatlist}
+          contentContainerStyle={{ flexGrow: 1 }}
+          data={filteredTasks}
+          renderItem={({ item }) => (
+            <DataItem
+              data={item}
+              onDelete={() => deleteData(item.id)}
+              onEdit={() => openEditModal(item)}
             />
           )}
-        </View>
+          keyExtractor={(item) => item.id.toString()}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Image
+                source={require("../assets/search.png")}
+                style={{ width: 200, height: 200 }}
+              />
+              <Text style={styles.emptyList}>No results found</Text>
+            </View>
+          }
+        />
+        {selectedTask && (
+          <EditDataModal
+            visible={editModalVisible}
+            data={selectedTask}
+            onSave={saveEditedTask}
+            onCancel={cancelEditModal}
+          />
+        )}
+      </View>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: "#FFFFFA",
   },
   button: {
@@ -141,9 +141,7 @@ const styles = StyleSheet.create({
     color: "grey",
     marginTop: 10,
   },
-  flatlist:{
-
-  }
+  flatlist: {},
 });
 
 export default SearchScreenModal;

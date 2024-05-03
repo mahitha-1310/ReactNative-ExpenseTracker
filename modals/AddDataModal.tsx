@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Alert,
@@ -31,8 +30,20 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedType, setSelectedType] = useState("expense");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const expenseCategories = ["Food", "Rent", "Utilities", "Transportation", "Others"];
-  const incomeCategories = ["Salary", "Freelance", "Investment", "Gifts", "Others"];
+  const expenseCategories = [
+    "Food",
+    "Rent",
+    "Utilities",
+    "Transportation",
+    "Others",
+  ];
+  const incomeCategories = [
+    "Salary",
+    "Freelance",
+    "Investment",
+    "Gifts",
+    "Others",
+  ];
   const [description, setDescription] = useState("");
 
   const handleDescriptionChange = (text: string) => {
@@ -46,11 +57,13 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
       selectedCategory === ""
     )
       return Alert.alert("", "Please fill in all the mandatory fields.");
-    if(!(/^\d*\.?\d*$/.test(amount.trim())))
+    if (!/^\d*\.?\d*$/.test(amount.trim()))
       return Alert.alert("", "Please enter valid amount.");
-    if(
-      description.trim().length>250
-    ) return Alert.alert("", "Description can't contain more than 250 characters.");
+    if (description.trim().length > 250)
+      return Alert.alert(
+        "",
+        "Description can't contain more than 250 characters."
+      );
     const newData = {
       id: String(Date.now()),
       amount: amount.trim(),
@@ -99,7 +112,14 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
               ]}
               onPress={() => setSelectedType("income")}
             >
-              <Text style={[styles.switchButtonText, selectedType === "income" && styles.selectedTypeButtonText]}>INCOME</Text>
+              <Text
+                style={[
+                  styles.switchButtonText,
+                  selectedType === "income" && styles.selectedTypeButtonText,
+                ]}
+              >
+                INCOME
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -108,7 +128,14 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
               ]}
               onPress={() => setSelectedType("expense")}
             >
-              <Text style={[styles.switchButtonText, selectedType === "expense" && styles.selectedTypeButtonText]}>EXPENSE</Text>
+              <Text
+                style={[
+                  styles.switchButtonText,
+                  selectedType === "expense" && styles.selectedTypeButtonText,
+                ]}
+              >
+                EXPENSE
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -148,11 +175,11 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
             )}
           </View>
           <TextInput
-        style={styles.input}
-        placeholder="Enter description (optional)"
-        value={description}
-        onChangeText={handleDescriptionChange}
-      />
+            style={styles.input}
+            placeholder="Enter description (optional)"
+            value={description}
+            onChangeText={handleDescriptionChange}
+          />
           <View style={styles.categorySelector}>
             <Picker
               selectedValue={selectedCategory}
@@ -176,7 +203,6 @@ const AddDataModal: React.FC<AddDataModalProps> = ({
                   ))}
             </Picker>
           </View>
-          
 
           <View style={styles.buttonContainer}>
             <Pressable style={styles.button} onPress={onCancel}>
@@ -202,8 +228,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#702632",
     margin: 20,
     borderRadius: 10,
-    width:"30%",
-    alignItems:"center"
+    width: "30%",
+    alignItems: "center",
   },
   buttonText: {
     padding: 10,
@@ -277,10 +303,9 @@ const styles = StyleSheet.create({
     color: "black",
     padding: 10,
     fontSize: 14,
-    fontWeight: "bold"
-
+    fontWeight: "bold",
   },
-  categorySelector:{
+  categorySelector: {
     backgroundColor: "#fff",
     color: "#000",
     borderRadius: 5,
@@ -290,10 +315,9 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     width: "100%",
   },
-  selectedTypeButtonText:{
-    color:"#FFFFFA"
-  }
-  
+  selectedTypeButtonText: {
+    color: "#FFFFFA",
+  },
 });
 
 export default AddDataModal;
